@@ -30,21 +30,22 @@ export const api = {
 
     newContact: async (data:any) => {
         const response = await httpCommons.post(`api/schedule`, data)
-        if (response.data.status) {
+        if (response.status === 200) {
             return response.data
         }
     },
 
     putContact: async (id:number, data:any) => {
+        console.log(data)
         const response = await httpCommons.put(`api/schedule/${id}`, data)
-        if (response.data.status) {
+        if (response.status === 200) {
             return response.data
         }
     },
 
     deleteContact: async (id:number) => {
         const response = await httpCommons.delete(`api/schedule/${id}`)
-        if (response.data.status) {
+        if (response.status === 200) {
             return response.data
         }
     },

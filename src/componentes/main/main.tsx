@@ -27,7 +27,7 @@ export default function Main() {
   //Function para deletar contato
   const deleteContact = async (id:number) => {
     const response = await api.deleteContact(id);
-    if ( response.data.status === true ) {
+    if ( response.status === true ) {
       getNumbers()
     }
   }

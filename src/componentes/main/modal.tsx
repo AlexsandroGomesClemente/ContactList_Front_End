@@ -25,10 +25,11 @@ function ModalSave(props: Props) {
     if(props.operation === 'Editar') {
         const getContact = async () => {
             const getNumber = await api.getContact(props.idUser)
-            setName(getNumber.data.name)
-            setEmail(getNumber.data.email)
-            setDataNasc(getNumber.data.date_born)
-            setCpf(getNumber.data.cpf)
+            setName(getNumber.data[0].name)
+            setEmail(getNumber.data[0].email)
+            setDataNasc(getNumber.data[0].date_born)
+            setCpf(getNumber.data[0].cpf)
+            setTelefone(getNumber.data[0].numbers[0].number)
           }
           getContact()
     }
@@ -39,7 +40,7 @@ function ModalSave(props: Props) {
   const endContact = async () => {
     const data : any = {
         name,
-        numbers : [telefone],
+        numbers : [String(telefone)],
         email,
         cpf,
         date_born : dataNasc,
@@ -47,7 +48,7 @@ function ModalSave(props: Props) {
     
     if( props.operation === 'Adicionar') {
         const response = await api.newContact(data)
-        if ( response.data.status === true ) {
+        if ( response.status === true ) {
             handleClose()
         }
     }
@@ -55,7 +56,8 @@ function ModalSave(props: Props) {
     
     if( props.operation === 'Editar') {
         const response = await api.putContact(props.idUser, data)
-        if ( response.data.status === true ) {
+        console.log(response)
+        if ( response.status === true ) {
             handleClose()
         }
     }
