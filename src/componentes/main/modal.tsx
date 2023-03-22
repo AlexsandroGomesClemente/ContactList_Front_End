@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { api } from '../../api/api';
 
 interface Props  {
@@ -49,6 +51,16 @@ function ModalSave(props: Props) {
     if( props.operation === 'Adicionar') {
         const response = await api.newContact(data)
         if ( response.status === true ) {
+          toast.success(response.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
             handleClose()
         }
     }
@@ -56,8 +68,17 @@ function ModalSave(props: Props) {
     
     if( props.operation === 'Editar') {
         const response = await api.putContact(props.idUser, data)
-        console.log(response)
         if ( response.status === true ) {
+          toast.success(response.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
             handleClose()
         }
     }
@@ -131,6 +152,7 @@ function ModalSave(props: Props) {
           </Button>
         </Modal.Footer>
       </Modal>
+      < ToastContainer /> 
     </>
   );
 }

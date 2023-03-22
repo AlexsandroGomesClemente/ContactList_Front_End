@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import ModalSave from './modal';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { api } from '../../api/api'
 import '../../styles/Main.css'
 
@@ -29,6 +31,17 @@ export default function Main() {
     const response = await api.deleteContact(id);
     if ( response.status === true ) {
       getNumbers()
+      console.log(response)
+      toast.success(response.message,{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
     }
   }
 
@@ -77,6 +90,7 @@ export default function Main() {
           </Button>{' '}
 
           {showModal && <ModalSave closerModal={modalCloser} operation={operationType} idUser={idUser}/>}
+          < ToastContainer /> 
         </div>
     )
 } 

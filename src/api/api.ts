@@ -36,7 +36,6 @@ export const api = {
     },
 
     putContact: async (id:number, data:any) => {
-        console.log(data)
         const response = await httpCommons.put(`api/schedule/${id}`, data)
         if (response.status === 200) {
             return response.data
